@@ -10,7 +10,7 @@ A Multi-pricinpal counter contract.
 - A public function count-up that increments the counter for tx-sender.
 - A public function get-count that returns the current counter value for the passed principal.
 
-## To Test
+## Test in Clarinet Console
 
 Open the Clarinet Console within the terminal
 
@@ -47,3 +47,28 @@ You can change `tx-sender` to a different Principal from the test addresses in t
 ::set_tx_sender ST1J4G6RR643BCG8G8SR6M2D9Z9KXT2NJDRK3FBTK
 ```
 Then you can check the count and increment the count for the new `tx-sender` principal using the method mentioned above.
+
+
+## Unit Tests
+
+Unit test are writted in TypeScript.
+
+For the counter contract, the test are writted in `tests/counter_test.ts`.
+
+Tests are defined using the `Clarinet.test()` function.
+
+Tests should cover both success and failure sates.
+
+Tests should be kept as simple as possible - each test should check **one** aspect of a function.
+
+For the **Counter contract** we want to check that
+- `get-count` returns u0 for principals that have never called `count-up`.
+- `get-count` returns the number of times (`uint`) a specific principal called `count-up`.
+- `count-up` increments the counter for the `tx-sender` as observed by `get-count` and returns `(ok true)`.
+
+
+Run unit tests in the terminal via the following command
+
+```bash
+clarinet test
+```
