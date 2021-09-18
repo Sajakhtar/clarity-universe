@@ -52,3 +52,6 @@ Clarinet.test({
 
   }
 });
+
+
+// Testing the multiplayer aspect
