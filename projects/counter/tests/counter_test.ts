@@ -21,7 +21,7 @@ Clarinet.test({
     count.result.expectUint(0);
 
   }
-})
+});
 
 
 // Testing count-up
@@ -55,3 +55,51 @@ Clarinet.test({
 
 
 // Testing the multiplayer aspect
+Clarinet.test({
+  name: "counters are specific to the tx-sender",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+
+    // Get the deployer account
+    let deployer = accounts.get('deployer')!;
+
+    // Get some other accounts
+    let wallet1 = accounts.get('wallet_1')!;
+    let wallet2 = accounts.get('wallet_2')!;
+    let wallet9 = accounts.get('wallet_9')!;
+
+    // Mine a few contract calls to count-up
+    let block = chain.mineBlock([
+
+      // Wallet 1 calls count-up one time
+      Tx.contractCall('counter', 'count-up', [], wallet1.address),
+
+      // / Wallet 2 calls count-up two times
+      Tx.contractCall('counter', 'count-up', [], wallet2.address),
+      Tx.contractCall('counter', 'count-up', [], wallet2.address),
+
+      // / Wallet 9 calls count-up three times
+      Tx.contractCall('counter', 'count-up', [], wallet9.address),
+      Tx.contractCall('counter', 'count-up', [], wallet9.address),
+      Tx.contractCall('counter', 'count-up', [], wallet9.address),
+
+    ]);
+
+    // Get and assert the counter value for deployer
+    let deployerCount = chain.callReadOnlyFn('counter', 'get-count', [types.principal(deployer.address)], deployer.address);
+    deployerCount.result.expectUint(0);
+
+    // Get and assert the counter value for wallet 1
+    let wallet1Count = chain.callReadOnlyFn('counter', 'get-count', [types.principal(wallet1.address)], wallet1.address);
+    wallet1Count.result.expectUint(1);
+
+    // Get and assert the counter value for wallet 2
+    let wallet2Count = chain.callReadOnlyFn('counter', 'get-count', [types.principal(wallet2.address)], wallet2.address);
+    wallet2Count.result.expectUint(2);
+
+
+    // Get and assert the counter value for wallet 9
+    let wallet9Count = chain.callReadOnlyFn('counter', 'get-count', [types.principal(wallet9.address)], wallet9.address);
+    wallet9Count.result.expectUint(3);
+
+  }
+});
