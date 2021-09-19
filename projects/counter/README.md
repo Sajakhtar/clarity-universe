@@ -10,7 +10,16 @@ A Multi-principal counter contract.
 - A public function count-up that increments the counter for tx-sender.
 - A public function get-count that returns the current counter value for the passed principal.
 
-## Test in Clarinet Console
+## Code Check
+
+Check code for errors using the following in the terminal
+
+```bash
+clarinet check
+```
+
+
+## Manual testing in Clarinet Console
 
 Open the Clarinet Console within the terminal
 
@@ -22,7 +31,7 @@ In the Clarinet Console, the contract deployer is the current `tx-sender`, which
 
 
 To check the count of the current `tx-sender` if it's the deployer, there is no need to specify the contract address:
-```bash
+```clarity
 (contract-call? .counter get-count tx-sender)
 ```
 
@@ -51,7 +60,7 @@ Then you can check the count and increment the count for the new `tx-sender` pri
 
 ## Unit Tests
 
-Unit test are writted in TypeScript.
+Unit tests are writted in TypeScript.
 
 For the counter contract, the test are writted in `tests/counter_test.ts`.
 
