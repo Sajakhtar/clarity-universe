@@ -55,7 +55,7 @@ ___
 
 Unit tests are writted in TypeScript.
 
-For the counter contract, the test are writted in `tests/timelocked-wallet_test.ts`.
+For the counter contract, the test are writted in `tests/multisig-vault_test.ts`.
 
 Tests are defined using the `Clarinet.test()` function.
 
