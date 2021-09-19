@@ -106,6 +106,7 @@ For the **Timelocked Wallet contract** we want to check that
   - Does not allow anyone else to lock an amount
   - Cannot be locked more than once
   - Cannot set the unlock height to a value less than the current block height
+  - Contract owner cannot lock with zero amount
 - bestow function
   - Allows the beneficiary to bestow the right to claim to someone else
   - Does not allow anyone else to bestow the right to claim to someone else (not even the contract owner)

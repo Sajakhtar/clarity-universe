@@ -83,6 +83,24 @@ Clarinet.test({
   }
 });
 
+Clarinet.test({
+  name: "Contract owner cannot lock with zero amount",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get('deployer')!;
+    const beneficiary = accounts.get('wallet_1')!;
+    const amount = 0;
+    const block = chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'lock', [types.principal(beneficiary.address), types.uint(10), types.uint(amount)], deployer.address)
+    ]);
+
+    // Should return err-no-value (err u103).
+    block.receipts[0].result.expectErr().expectUint(103);
+
+    // Assert there are no transfer events
+    assertEquals(block.receipts[0].events.length, 0);
+  }
+});
+
 // Testing bestow
 //
 
@@ -122,13 +140,84 @@ Clarinet.test({
 
 // Testing claim
 //
+
 Clarinet.test({
-  name: "Does not allow anyone else to bestow the right to claim to someone else (Not even the contract owner)",
+  name: "Allows the beneficiary to claim the balance when the block height is reached",
   async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get('deployer')!;
+    const beneficiary = accounts.get('wallet_1')!;
+    const targetBlockHeight = 10;
+    const amount = 10;
+
+    chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'lock', [types.principal(beneficiary.address), types.uint(targetBlockHeight), types.uint(amount)], deployer.address)
+    ]);
+
+    // Advance the chain until the unlock height
+    chain.mineEmptyBlockUntil(targetBlockHeight);
+
+    const block = chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'claim', [], beneficiary.address)
+    ]);
+
+    // The claim was successful and the STX were transferred.
+    block.receipts[0].result.expectOk().expectBool(true);
+    block.receipts[0].events.expectSTXTransferEvent(amount, `${deployer.address}.timelocked-wallet`, beneficiary.address);
+  }
+});
+
+Clarinet.test({
+  name: "Does not allow the beneficiary to claim the balance before the block - height is reached",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get('deployer')!;
+    const beneficiary = accounts.get('wallet_1')!;
+    const targetBlockHeight = 10;
+    const amount = 10;
+
+    chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'lock', [types.principal(beneficiary.address), types.uint(targetBlockHeight), types.uint(amount)], deployer.address)
+    ]);
+
+    // Advance the chain until the unlock height minus one
+    chain.mineEmptyBlockUntil(targetBlockHeight - 1);
+
+    const block = chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'claim', [], beneficiary.address)
+    ]);
+
+    // Should return err-unlock-height-not-reached (err u105)
+    block.receipts[0].result.expectErr().expectUint(105);
+
+    // Assert there are no transfer events
+    assertEquals(block.receipts[0].events.length, 0);
 
   }
 });
 
-// Allows the beneficiary to claim the balance when the block height is reached.
-// Does not allow the beneficiary to claim the balance before the block - height is reached.
-// Nobody but the beneficiary can claim the balance once the block height is reached.
+Clarinet.test({
+  name: "Nobody but the beneficiary can claim the balance once the block height is reached",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get('deployer')!;
+    const beneficiary = accounts.get('wallet_1')!;
+    const badActor = accounts.get('wallet_9')!;
+    const targetBlockHeight = 10;
+    const amount = 10;
+
+    chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'lock', [types.principal(beneficiary.address), types.uint(targetBlockHeight), types.uint(amount)], deployer.address)
+    ]);
+
+    // Advance the chain until the unlock height
+    chain.mineEmptyBlockUntil(targetBlockHeight);
+
+    const block = chain.mineBlock([
+      Tx.contractCall('timelocked-wallet', 'claim', [], badActor.address)
+    ]);
+
+    // Should return err-beneficiary-only (err u104).
+    block.receipts[0].result.expectErr().expectUint(104);
+
+    // Assert there are no transfer events
+    assertEquals(block.receipts[0].events.length, 0);
+  }
+});
