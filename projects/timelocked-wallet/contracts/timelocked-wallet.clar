@@ -16,12 +16,13 @@
 (define-constant err-beneficiary-only (err u104)) ;; Somebody other than the beneficiary called claim or lock
 (define-constant err-unlock-height-not-reached (err u105)) ;; The beneficiary called claim but the unlock height has not yet been reached
 
+;; data maps and vars
+;;
+
 ;; Data
 (define-data-var beneficiary (optional principal) none)
 (define-data-var unlock-height uint u0)
 
-;; data maps and vars
-;;
 
 ;; private functions
 ;;
