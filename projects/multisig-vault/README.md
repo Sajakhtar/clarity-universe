@@ -32,11 +32,15 @@ ___
 ## Public Functions
 
 - `start` - The start function will be called by the contract owner to initialise the vault; it's a simple function that updates the two variables with the proper guards in place.
-- `vote` -
-- `get-vote` -
-- `tally` -
-- `withdraw` -
-- `deposit` -
+- `vote` - ability for tx-sender to vote, as long tx-sender is one of the members
+- `get-vote` - read-only function to retrieve a vote
+- `tally` - private function that calculates the number of positive votes for a principal
+  - We will have to iterate over the members, retrieve their votes, and increment a counter if the vote equals true
+  - We want to reduce the list of members to a number that represents the total amount of positive votes; meaning, we need `fold` not `map`
+- `withdraw`
+  - tally the votes for tx-sender and check if it is larger than or equal to the number of votes required.
+  - If the transaction sender passes the bar, the contract shall transfer all its holdings to the tx-sender.
+- `deposit` - a convenience function to deposit tokens into the contrac
 
 ___
 ## Code Check
@@ -46,7 +50,6 @@ Check code for errors using the following in the terminal
 ```bash
 clarinet check
 ```
-
 ___
 ## Unit Tests
 
@@ -62,11 +65,23 @@ Tests should be kept as simple as possible - each test should check **one** aspe
 
 Clarinet has built-in assertion functions to check if an expected STX transfer event actually happened.
 
-For the **Multisig Vault contract** we want to check that
-- lock function
+For the **Multisig Vault contract** we want
+
+Make unit tests more manageable by adding reusable parts
+- define a bunch of standard values
+- create a setup function to initialise the contract - the function can then be called at the beginning of various tests to take care of calling start and making an initial STX token deposit by calling deposit
+
+
+- start function
   - something
-
-
+- vote function
+  - someting
+- get-vote
+  - something
+- withdraw
+  - something
+- changing votes
+  - something
 
 Run unit tests in the terminal via the following command
 
