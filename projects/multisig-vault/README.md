@@ -73,15 +73,21 @@ Make unit tests more manageable by adding reusable parts
 
 
 - start function
-  - something
+  - The contract owner can initialise the vault
+  - Nobody else can initialise the vault
+  - The vault can only be initialised once
+  - Cannot require more votes than members
 - vote function
-  - someting
+  - Only members should be allowed to successfully call vote
+  - It should also return the right error response if a non-member calls the function
 - get-vote
-  - something
+  - Can retrieve a member's vote for a principal
 - withdraw
-  - something
+  - The withdraw function returns an ok response containing the total number of votes for the tx-sender if the threshold is met
+  - Otherwise it returns an (err u104) (err-votes-required-not-met)
 - changing votes
-  - something
+  - Members have the ability to change their votes at any time, so we need a test where a vote change causes a recipient to no longer be eligible to claim the balance.
+
 
 Run unit tests in the terminal via the following command
 

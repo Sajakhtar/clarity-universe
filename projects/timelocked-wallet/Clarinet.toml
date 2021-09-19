@@ -1,10 +1,11 @@
 [project]
 name = "timelocked-wallet"
 requirements = []
-[contracts.smart-claimant]
-path = "contracts/smart-claimant.clar"
-depends_on = []
 
 [contracts.timelocked-wallet]
 path = "contracts/timelocked-wallet.clar"
 depends_on = []
+
+[contracts.smart-claimant]
+path = "contracts/smart-claimant.clar"
+depends_on = ["timelocked-wallet"]
