@@ -4,4 +4,4 @@ Clarity smart contract Projects from the the first cohort of the [Clarity Univer
 
 ___
 ## Projects
-1. [Counter contract - A Multi-pricinpal counter contract.](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/counter)
+1. [Counter contract - A Multi-principal counter contract.](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/counter)

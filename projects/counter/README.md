@@ -3,7 +3,7 @@
 
 ## Description
 
-A Multi-pricinpal counter contract.
+A Multi-principal counter contract.
 
 ## Features
 - A data store (map) that keeps a track of the count per principal.
