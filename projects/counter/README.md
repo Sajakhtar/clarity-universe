@@ -1,15 +1,16 @@
 # Counter Contract
 
-
 ## Description
 
 A Multi-principal counter contract.
 
+___
 ## Features
 - A data store (map) that keeps a track of the count per principal.
 - A public function count-up that increments the counter for tx-sender.
 - A public function get-count that returns the current counter value for the passed principal.
 
+___
 ## Code Check
 
 Check code for errors using the following in the terminal
@@ -17,8 +18,7 @@ Check code for errors using the following in the terminal
 ```bash
 clarinet check
 ```
-
-
+___
 ## Manual testing in Clarinet Console
 
 Open the Clarinet Console within the terminal
@@ -57,7 +57,7 @@ You can change `tx-sender` to a different Principal from the test addresses in t
 ```
 Then you can check the count and increment the count for the new `tx-sender` principal using the method mentioned above.
 
-
+___
 ## Unit Tests
 
 Unit tests are writted in TypeScript.

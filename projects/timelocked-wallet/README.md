@@ -11,7 +11,7 @@ The timelocked wallet contract will unlock at a specific block height.
 Such a contract can be useful if you want to bestow tokens to someone after a certain time period.
 
 Use case: imagine that in the crypto-future you want to put some money aside for when your child comes of age.
-
+___
 ## Features
 
 - A user can deploy the time-locked wallet contract.
@@ -19,14 +19,14 @@ Use case: imagine that in the crypto-future you want to put some money aside for
 - Anyone, not just the contract deployer, can send tokens to the contract.
 - The beneficiary can claim the tokens once the specified block height is reached.
 - Additionally, the beneficiary can transfer the right to claim the wallet to a different principal.
-
+___
 ## Public Functions
 
 - `lock` - takes the principal, unlock height, and an initial deposit amount.
 - `claim`- transfers the tokens to the tx-sender if and only if the unlock height has been reached and the tx-sender is equal to the beneficiary.
 - `bestow` - allows the beneficiary to transfer the right to claim the wallet.
 
-
+___
 ## Code Check
 
 Check code for errors using the following in the terminal
@@ -34,7 +34,7 @@ Check code for errors using the following in the terminal
 ```bash
 clarinet check
 ```
-
+___
 ## Manual testing in Clarinet Console
 
 Open the Clarinet Console within the terminal
@@ -83,9 +83,7 @@ Simulate mining to set `block-height` to the `unlock-height` of `u10`
 ```
 
 Re-run the `claim` function and check the balance of the contracts and principals (asset maps)
-
-
-
+___
 ## Unit Tests
 
 Unit tests are writted in TypeScript.
