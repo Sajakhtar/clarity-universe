@@ -13,4 +13,4 @@ ___
 ___
 ## Test
 
-To test the smart contracts in any of the projects, install the [Clarinet](https://github.com/hirosystems/clarinet#installation). Clariet is a runtime and command line tool for Clarity and Stacks blockchain.
+To test the smart contracts in any of the projects, [install Clarinet](https://github.com/hirosystems/clarinet#installation). Clariet is a runtime and command line tool for Clarity and Stacks blockchain.
