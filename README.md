@@ -8,8 +8,8 @@ ___
 1. [The Time-locked Wallet](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/timelocked-wallet) - provides a nice introduction to how blockchains change over time
     - The Smart Claimant - illustrates how inter-contract calls work and how you can you can build on top of other smart contracts.
 1. [The Multi-signature Vault](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/multisig-vault) - a basic voting mechanism and iteratating over sequences.
-
-
+1. [SIP009 Non-fungible Token (NFT)](#) - a SIP009-compliant NFT
+1. [SIP010 Fungible Token](#) - a SIP010-compliant Fungible Token
 ___
 ## Test
 
