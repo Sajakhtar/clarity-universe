@@ -2,6 +2,8 @@
 
 Clarity smart contract Projects from the the first cohort of the [Clarity Universe](https://stacks.org/clarity-universe) - a Clarity language and blockchain bootcamp for the Stacks PoX blockhain.
 
+Projects are courtesy of [Clarity Language Book](https://book.clarity-lang.org/).
+
 ___
 ## Projects
 1. [The Counter](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/counter) - a multi-principal counter contract.
