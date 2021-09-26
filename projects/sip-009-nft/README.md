@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple SIP009 Compliant NFT Conctract.
+A simple SIP009 Compliant NFT Contract.
 
 ___
 ## Features
