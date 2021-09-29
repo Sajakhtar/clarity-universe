@@ -19,7 +19,8 @@ ___
   - `get-total-supply`: the current total supply (which does not need to be a constant)
     - - We simply wrap the built-in function `ft-get-supply` that retrieves the balance
   - `get-token-uri`: return an optional URI that represents metadata of this token
-
+- `mint`: for our convenience to mint FTs using the built-in `ft-mint?` function
+  - we have a guard (assert) here to only allow the contract owner to mint FTs
 ___
 ## Code Check
 
