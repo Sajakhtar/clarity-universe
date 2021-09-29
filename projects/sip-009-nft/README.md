@@ -97,6 +97,7 @@ We can change the `tx-sender` to a principal that is not the contract deployer e
 ```
 
 Since wallet_9 is the owner of NFT with ID `u1` and is the current `tx-sender`, we can call the `transfer` function and send the NFT to another address e.g. wallet_1. We can check the new owner using `::get_assets_maps`.
+```clarity
 (contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-nft transfer u1 tx-sender 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5)
 ```
 ___

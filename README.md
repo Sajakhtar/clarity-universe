@@ -11,7 +11,7 @@ ___
     - The Smart Claimant - illustrates how inter-contract calls work and how you can you can build on top of other smart contracts.
 1. [The Multi-signature Vault](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/multisig-vault) - a basic voting mechanism and iteratating over sequences.
 1. [SIP009 Non-fungible Token (NFT)](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/sip-009-nft) - a SIP009-compliant NFT
-1. [SIP010 Fungible Token](#) - a SIP010-compliant Fungible Token
+1. [SIP010 Fungible Token (FT)](#) - a SIP010-compliant Fungible Token
 ___
 ## Test
 
