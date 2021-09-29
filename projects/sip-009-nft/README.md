@@ -6,8 +6,16 @@ A simple SIP009 Compliant NFT Contract.
 
 ___
 ## Features
-- Implements [SIP-009: Standard Trait Definition for Non-Fungible Tokens](https://github.com/stacksgov/sips/blob/main/sips/sip-009/sip-009-nft-standard.md).
-- A public function count-up that increments the counter for tx-sender.
+- Implements [SIP009: Standard Trait Definition for Non-Fungible Tokens](https://github.com/stacksgov/sips/blob/main/sips/sip-009/sip-009-nft-standard.md)
+- SIP009 specifies the following functions for NFTs
+  - `get-last-token-id`: used to tracks the ID of the last NFT minted, usefule to set the ID of the next NFT to be minted
+  - `get-token-uri`: to return a link to the metadata for the NFT content (this example will not have a link and will return `none`)
+  - `get-owner`: returns the owner of the NFT by using the built-in function `nft-get-owner?`
+  - `transfer`: asserts that `sender` equals `tx-sender` so that only the principal that owns the NFT can transfer it
+- `mint`: for our convenience to mint NFTs using the built-in `nft-mint?` function
+  - we have a guard (assert) here to only allow the contract owner to mint NFTs
+  - we also increment the `last-token-id`
+
 
 ___
 ## Code Check
