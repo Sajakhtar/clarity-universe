@@ -7,7 +7,7 @@ A simple SIP010 Compliant Fungible Token (FT) Contract.
 ___
 ## Features
 - Implements [SIP010: Standard Trait Definition for Fungible Tokens](https://github.com/stacksgov/sips/blob/main/sips/sip-010/sip-010-fungible-token-standard.md)
-- SIP010 specifies the following functions for NFTs
+- SIP010 specifies the following functions for FTs
   - `transfer`: transfers tokens from `sender` to a new principal
     - asserts that the `sender` equals `tx-sender` so principals can only transfer tokens they own
     - It should also unwrap and print the memo if it is not none (we use match to conditionally call print if the passed memo is a some)
@@ -38,7 +38,7 @@ Open the Clarinet Console within the terminal
 clarinet console
 ```
 
-The Clarinet Console will be used to interact with the contract to mint NFTs and transfer them.
+The Clarinet Console will be used to interact with the contract to mint FTs and transfer them.
 
 
 In the Clarinet Console, the contract deployer is the current `tx-sender`, which is the very first of the 10 test addresses the console provides. To check the current `tx-sender`
