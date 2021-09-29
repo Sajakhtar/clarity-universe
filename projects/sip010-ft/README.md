@@ -8,14 +8,17 @@ ___
 ## Features
 - Implements [SIP010: Standard Trait Definition for Fungible Tokens](https://github.com/stacksgov/sips/blob/main/sips/sip-010/sip-010-fungible-token-standard.md)
 - SIP010 specifies the following functions for NFTs
-  - `get-last-token-id`: used to tracks the ID of the last NFT minted, usefule to set the ID of the next NFT to be minted
-  - `get-token-uri`: to return a link to the metadata for the NFT content (this example will not have a link and will return `none`)
-  - `get-owner`: returns the owner of the NFT by using the built-in function `nft-get-owner?`
-  - `transfer`: asserts that `sender` equals `tx-sender` so that only the principal that owns the NFT can transfer it
-- `mint`: for our convenience to mint NFTs using the built-in `nft-mint?` function
-  - we have a guard (assert) here to only allow the contract owner to mint NFTs
-  - we also increment the `last-token-id`
-
+  - `transfer`: transfers tokens from `sender` to a new principal
+    - asserts that the `sender` equals `tx-sender` so principals can only transfer tokens they own
+    - It should also unwrap and print the memo if it is not none (we use match to conditionally call print if the passed memo is a some)
+  - `get-name`: returns the human readable name of the token
+  - `get-symbol`: returns the ticker sumbol, or none
+  - `get-decimals`: returns the number decimals used e.g. 6 would mean 1_000_000 represents 1 token
+  - `get-balance`: returns the balance of the passed principal
+    - We simply wrap the built-in function `ft-get-balance` that retrieves the balance
+  - `get-total-supply`: the current total supply (which does not need to be a constant)
+    - - We simply wrap the built-in function `ft-get-supply` that retrieves the balance
+  - `get-token-uri`: return an optional URI that represents metadata of this token
 
 ___
 ## Code Check
