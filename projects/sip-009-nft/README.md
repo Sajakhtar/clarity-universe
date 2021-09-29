@@ -42,7 +42,7 @@ In the Clarinet Console, the contract deployer is the current `tx-sender`, which
 tx-sender
 ```
 
-You can change tx-sender to a different Principal from the test addresses in the Clarinet console e.g. to wallet_1
+You can change tx-sender to a different Principal from the test addresses in the Clarinet console e.g. to wallet_9
 ```clarity
 ::set_tx_sender STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6
 ```
@@ -62,7 +62,7 @@ Simulate mining to set block-height to the unlock-height of u10
 ::advance_chain_tip 10
 ```
 
-We can call the `mint` function in the NFT contract with the default tx-sender, who is also the contract deployer
+We can call the `mint` function in the NFT contract with the default tx-sender, who is also the contract deployer. We can check the minted NFT now belongs to the contract deployer using `::get_assets_maps`.
 ```clarity
 (contract-call? .saj-nft mint tx-sender)
 ```

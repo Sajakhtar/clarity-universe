@@ -46,7 +46,7 @@ In the Clarinet Console, the contract deployer is the current `tx-sender`, which
 tx-sender
 ```
 
-You can change tx-sender to a different Principal from the test addresses in the Clarinet console e.g. to wallet_1
+You can change tx-sender to a different Principal from the test addresses in the Clarinet console e.g. to wallet_9
 ```clarity
 ::set_tx_sender STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6
 ```
@@ -66,43 +66,71 @@ Simulate mining to set block-height to the unlock-height of u10
 ::advance_chain_tip 10
 ```
 
-We can call the `mint` function in the NFT contract with the default tx-sender, who is also the contract deployer
+We can call the `mint` function in the FT contract with the default tx-sender, who is also the contract deployer, to min 1000 tokens. We can check the minted tokens now belong to the contract deployer using `::get_assets_maps`.
 ```clarity
-(contract-call? .saj-nft mint tx-sender)
+(contract-call? .saj-coin mint u1000 tx-sender)
 ```
 
-We can check the `token-id` of the last minted NFT.
+We can check the friendly name of FT.
 ```clarity
-(contract-call? .saj-nft get-last-token-id)
+(contract-call? .saj-coin get-name)
 ```
 
-We can transfer the NFT just minted to another pricipal, e.g. wallet_9.  We can check the new owner using `::get_assets_maps`.
+We can check the ticker name of FT.
 ```clarity
-(contract-call? .saj-nft transfer u1 tx-sender 'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6)
+(contract-call? .saj-coin get-symbol)
 ```
 
-We can check the owner of an NFT based on the `token-id`.
+We can check the decimal places allowed for the FT.
 ```clarity
-(contract-call? .saj-nft get-owner u1)
-```
-We can fetch the meta-data URL for an NFT based on the `token-id`.
-```clarity
-(contract-call? .saj-nft get-token-uri u1)
+(contract-call? .saj-coin get-decimals)
 ```
 
-Since the current `tx-sender` is not the owner of the NFT, we can attempt to transfer it back to the `tx-sender` (delpyer's) address to get `err-not-token-owner` `u101` error.
+```
+We can fetch the meta-data URL for an FT.
 ```clarity
-(contract-call? .saj-nft transfer u1 'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6 tx-sender)
+(contract-call? .saj-coin get-token-uri)
 ```
 
-We can change the `tx-sender` to a principal that is not the contract deployer e.g. wallet_9 and run the `mint` function again to receive the `err-contract-owner-only` `u100` error.
+We can check the total supply of FT.
 ```clarity
-(contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-nft mint tx-sender)
+(contract-call? .saj-coin get-total-supply)
 ```
 
-Since wallet_9 is the owner of NFT with ID `u1` and is the current `tx-sender`, we can call the `transfer` function and send the NFT to another address e.g. wallet_1. We can check the new owner using `::get_assets_maps`.
+We can check the the FT balance for the deployer.
 ```clarity
-(contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-nft transfer u1 tx-sender 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5)
+(contract-call? .saj-coin get-balance tx-sender)
+```
+
+We can transfer some of the token just minted to another pricipal, e.g. wallet_9.  We can check the balance of tokens for each principal using `::get_assets_maps`.
+```clarity
+(contract-call? .saj-coin transfer u250 tx-sender 'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6 none)
+```
+
+We can check the the FT balance of wallet_9.
+```clarity
+(contract-call? .saj-coin get-balance 'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6)
+```
+
+We can transfer some of the token just minted to another pricipal, e.g. wallet_1, but this time with a memo.  We can check the balance of tokens for each principal using `::get_assets_maps`.
+```clarity
+(contract-call? .saj-coin transfer u200 tx-sender 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 (some 0x123456))
+```
+
+
+We can change the `tx-sender` to a principal that is not the contract deployer e.g. wallet_9 and run the `mint` function again for 2M tokens to receive the `err-contract-owner-only` `u100` error.
+```clarity
+(contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-coin mint u2000000 tx-sender)
+```
+
+We can check the the FT balance for the deployer.
+```clarity
+(contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-coin get-balance tx-sender)
+```
+
+We can change the `tx-sender` to a principal that doesnt not have sufficient balance to send tokens e.g. wallet_2, and try to send tokens to another principal e.g. wallet_8 to receive a `u1` error.
+```clarity
+(contract-call? 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.saj-coin transfer u500 tx-sender 'ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP none)
 ```
 ___
 ## Unit Tests
