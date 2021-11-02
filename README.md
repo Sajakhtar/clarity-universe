@@ -12,6 +12,7 @@ ___
 1. [The Multi-signature Vault](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/multisig-vault) - a basic voting mechanism and iteratating over sequences.
 1. [SIP009 Non-fungible Token (NFT)](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/sip-009-nft) - a SIP009-compliant NFT
 1. [SIP010 Fungible Token (FT)](https://github.com/Sajakhtar/clarity-universe/tree/main/projects/sip010-ft) - a SIP010-compliant Fungible Token
+1. [Hackathon](#) - NFT project
 ___
 ## Test
 
