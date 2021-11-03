@@ -1,7 +1,15 @@
-
 [project]
 name = "hackathon"
+requirements = []
 
-[contracts]
+[contracts.brand-nft]
+path = "contracts/brand-nft.clar"
+depends_on = ["sip009-nft-trait"]
 
-[notebooks]
+[contracts.consumer-nft]
+path = "contracts/consumer-nft.clar"
+depends_on = ["sip009-nft-trait"]
+
+[contracts.sip009-nft-trait]
+path = "contracts/sip009-nft-trait.clar"
+depends_on = []
