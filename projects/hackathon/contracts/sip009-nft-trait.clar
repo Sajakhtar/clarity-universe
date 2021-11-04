@@ -1,4 +1,3 @@
-
 ;; sip009-nft-trait
 ;; <add a description here>
 
