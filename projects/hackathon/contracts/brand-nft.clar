@@ -6,6 +6,13 @@
 ;; implementating trait when deploying to mainnet refernece the actual SIP009 trait contract on mainnet:
 ;; (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
+;; To Do
+;; Brand can mint many NFTs
+;; Brand can send NFTs to many specified principals (audience)
+;; Brand must also transfer STX tokens to many specified principals (audience)
+;; Consumer can claim (mint) one NFT and claim STX fee
+
+
 ;; constants
 ;;
 (define-constant contract-owner tx-sender)

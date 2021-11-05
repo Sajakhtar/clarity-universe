@@ -6,6 +6,11 @@
 ;; implementating trait when deploying to mainnet refernece the actual SIP009 trait contract on mainnet:
 ;; (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
+;; To Do
+;; Consumer can mint one profile NFT per address / web2 account
+;; Consumer can update profile meta data (offchain e.g. IPFS, Airweave)
+;; Mint fee covered by Trubit?
+
 ;; constants
 ;;
 (define-constant contract-owner tx-sender)
