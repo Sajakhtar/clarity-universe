@@ -112,3 +112,38 @@ Run unit tests in the terminal via the following command
 ```bash
 clarinet test
 ```
+
+Unit tests are writted in TypeScript.
+
+For the counter contract, the test are writted in `tests/multisig-vault_test.ts`.
+
+Tests are defined using the `Clarinet.test()` function.
+
+Tests should cover both success and failure sates.
+
+Tests should be kept as simple as possible - each test should check **one** aspect of a function.
+
+Clarinet has built-in assertion functions to check if an expected STX transfer event actually happened.
+
+For the **Multisig Vault contract** we want
+
+Make unit tests more manageable by adding reusable parts
+- define a bunch of standard values
+- create a setup function to initialise the contract - the function can then be called at the beginning of various tests to take care of calling start and making an initial STX token deposit by calling deposit
+
+
+- start function
+  - The contract owner can initialise the vault
+  - Nobody else can initialise the vault
+  - The vault can only be initialised once
+  - Cannot require more votes than members
+- vote function
+  - Only members should be allowed to successfully call vote
+  - It should also return the right error response if a non-member calls the function
+- get-vote
+  - Can retrieve a member's vote for a principal
+- withdraw
+  - The withdraw function returns an ok response containing the total number of votes for the tx-sender if the threshold is met
+  - Otherwise it returns an (err u104) (err-votes-required-not-met)
+- changing votes
+  - Members have the ability to change their votes at any time, so we need a test where a vote change causes a recipient to no longer be eligible to claim the balance.
