@@ -2,7 +2,7 @@
 
 ## Description
 
-Two SIP009 Compliant NFT Contracs
+Two SIP009 Compliant NFT Contracts
 1. A Consumer NFT contract - for consumers to mint their profile avater with meta data pertaining to their personal data they'd wish to monetize
 1. A Brand NFT contract - for brands to mint ads/ coupons/ surveys and pay consumers to receive them
 
