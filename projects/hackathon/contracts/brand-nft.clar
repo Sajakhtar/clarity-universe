@@ -12,7 +12,7 @@
 ;; Brand must also transfer STX tokens to many specified principals (audience)
 ;; Consumer can claim (mint) one NFT and claim STX fee
 ;; Public/ Private function ? for setting a consumer principal in the recipient(audience) map
-
+;; private function - set meta data URI (gaia / IPFS / airwaeve)
 
 ;; constants
 ;;

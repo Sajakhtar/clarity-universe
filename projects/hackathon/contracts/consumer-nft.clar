@@ -9,6 +9,8 @@
 ;; To Do
 ;; Consumer can mint one profile NFT per address / web2 account
 ;; Consumer can update profile meta data (offchain e.g. IPFS, Airweave)
+;; private function - set meta data URI
+;; private functio - update data meta URI
 ;; Mint fee covered by Trubit?
 
 ;; constants
