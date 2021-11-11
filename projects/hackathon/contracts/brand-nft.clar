@@ -19,6 +19,8 @@
 (define-constant contract-owner tx-sender)
 (define-constant err-contract-owner-only (err u100))
 (define-constant err-not-token-owner (err u101))
+;; error for already has one NFT
+
 
 ;; data maps and vars
 ;;
